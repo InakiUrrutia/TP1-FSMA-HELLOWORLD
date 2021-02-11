@@ -1,17 +1,16 @@
 package fr.univpau.exo4;
 
-import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.TickerBehaviour;
-import jade.lang.acl.ACLMessage;
+import jade.core.behaviours.WakerBehaviour;
 
 public class MyAgentManager extends Agent {
-    protected void setup() {
-        addBehaviour(new TickerBehaviour(this, 10000) {
-            @Override
-            protected void onTick() {
 
+    protected void setup() {
+        // Add behaviour
+        addBehaviour(new WakerBehaviour(this, 10000) {
+            protected void handleElapsedTimeout() {
+                addBehaviour(new AgentBehaviour((MyAgentManager) this.getAgent()));
             }
-        });
+        } );
     }
 }

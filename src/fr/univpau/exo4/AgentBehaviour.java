@@ -1,13 +1,13 @@
 package fr.univpau.exo4;
 
-import jade.core.behaviours.OneShotBehaviour;
-import jade.core.behaviours.ReceiverBehaviour;
+import jade.core.AID;
+import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 
 import static jade.lang.acl.ACLMessage.INFORM;
 import static jade.lang.acl.ACLMessage.REQUEST;
 
-public class AgentBehaviour extends OneShotBehaviour {
+public class AgentBehaviour extends Behaviour {
     MyAgentManager manager;
     MyAgentPrinter printer;
     int step;
@@ -26,13 +26,17 @@ public class AgentBehaviour extends OneShotBehaviour {
 
     @Override
     public void action() {
-        if (manager != null && this.manager.isAlive()) {
+
+        if (printer != null && this.printer.isAlive()) {
             switch (step) {
                 case 0:
-                    // attente
+                    System.out.println("Hello World first time !");
                     step = 0;
+                    break;
                 case 1:
-                    // send
+                    // attente reception message
+
+                    // réagit aux messages
                     ACLMessage msg = manager.receive();
                     if (msg != null) {
                         switch (msg.getPerformative()) {
@@ -48,20 +52,37 @@ public class AgentBehaviour extends OneShotBehaviour {
                     }
                     step = 1;
                     break;
-                case 2:
-                    System.out.println("Manager terminé !");
+            }
+        } else if (manager != null && this.manager.isAlive()) {
+            switch (step) {
+                case 1 :
+                    int i = 0;
+                    // send message REQUEST
+                    while(i <3) {
+                        ACLMessage msg = new ACLMessage(REQUEST);
+                        msg.addReceiver(new AID("Alice", AID.ISLOCALNAME));
+                        manager.send(msg);
+                        i++;
+                    }
+                    step = 1;
+                    break;
+                case 2 :
+                    // send message INFORM
+                    ACLMessage msg = new ACLMessage(INFORM);
+                    msg.addReceiver(new AID("Alice", AID.ISLOCALNAME));
+                    manager.send(msg);
                     step = 2;
                     break;
-                                }
-        } else if (printer != null && this.printer.isAlive()) {
-            switch (step) {
-                case 0 :
-                    System.out.println("Hello World first time !");
-                    step = 0;
+                case 3 :
+                    System.out.println("Manager terminé !");
+                    step = 3;
                     break;
-                case 1 :
-
             }
         }
+    }
+
+    @Override
+    public boolean done() {
+        return true;
     }
 }

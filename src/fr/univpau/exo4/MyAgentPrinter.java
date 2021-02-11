@@ -1,10 +1,6 @@
 package fr.univpau.exo4;
 
-import fr.univpau.exo2.MyOneShotBehavior;
-import fr.univpau.exo2.MyOneTimeMoreStepBehaviour;
-import fr.univpau.exo2.MyThreeStepBehaviour;
 import jade.core.Agent;
-import jade.lang.acl.ACLMessage;
 
 public class MyAgentPrinter extends Agent {
     private static final int REQUEST = 16;
@@ -13,5 +9,10 @@ public class MyAgentPrinter extends Agent {
     @Override
     protected void setup() {
         // Add behaviour
+        addBehaviour(new AgentBehaviour((MyAgentPrinter) this.getAgent()));
+    }
+
+    private Object getAgent() {
+        return this.getAgent();
     }
 }

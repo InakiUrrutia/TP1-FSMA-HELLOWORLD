@@ -1,7 +1,6 @@
 package fr.univpau.exo2;
 
 import jade.core.Agent;
-import jade.core.behaviours.*;
 
 public class HelloWorldAgent extends Agent {
 	// Define agent properties here
