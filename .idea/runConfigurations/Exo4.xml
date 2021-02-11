@@ -4,7 +4,7 @@
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="jade.Boot" />
     <module name="TP1_HELLOWORLD" />
-    <option name="PROGRAM_PARAMETERS" value="-gui -port 2000 -agents &quot;A1:fr.univpau.exo4.MyAgentPrinter(Alice); A2:fr.univpau.exo4.MyAgentManager(Bob)&quot;" />
+    <option name="PROGRAM_PARAMETERS" value="-gui -port 2000 -agents &quot;A1:fr.univpau.Agent_1(Alice); A2:fr.univpau.Agent_2(&quot;bob&quot;)" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
